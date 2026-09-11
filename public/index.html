@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CheTeam — Club de fútbol</title>
+<meta name="description" content="CheTeam: alineación, historial de partidos, estadísticas y vitrina de títulos. Formulario para desafiar al equipo." />
+<link rel="icon" href="logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Oswald:wght@400;500;600&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <a class="brand" href="#inicio">
+    <img class="brand__crest" src="logo.png" alt="Escudo de CheTeam" />
+    <span class="brand__text">CheTeam</span>
+  </a>
+  <nav class="nav">
+    <a class="nav__link nav__link--active" href="#inicio">Inicio</a>
+    <a class="nav__link" href="#plantel">Alineación</a>
+    <a class="nav__link" href="#historial">Historial</a>
+    <a class="nav__link" href="#vitrina">Vitrina</a>
+    <a class="nav__link" href="#desafio">Desafíos</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="hero__content">
+      <p class="hero__kicker">Club de fútbol</p>
+      <h1 class="hero__title">CheTeam</h1>
+      <p class="hero__lead">
+        Alineación, historial completo de partidos, estadísticas y títulos del club.
+        Los equipos que quieran enfrentarnos pueden dejar su solicitud al final de la página.
+      </p>
+      <dl class="hero__facts">
+        <div><dt>Títulos</dt><dd id="fact-trophies">00</dd></div>
+        <div><dt>Jugadores</dt><dd id="fact-players">00</dd></div>
+        <div><dt>Partidos jugados</dt><dd id="fact-played">00</dd></div>
+      </dl>
+      <a class="btn" href="#desafio">Solicitar partido</a>
+    </div>
+    <div class="hero__crest">
+      <img class="hero__logo" src="logo.png" alt="Escudo de CheTeam" />
+    </div>
+  </section>
+
+  <section class="section reveal" id="plantel">
+    <header class="section__head">
+      <span class="section__num">01</span>
+      <h2>Alineación</h2>
+    </header>
+    <div class="roster" id="roster-grid"></div>
+  </section>
+
+  <section class="section reveal" id="historial">
+    <header class="section__head">
+      <span class="section__num">02</span>
+      <h2>Historial y estadísticas</h2>
+    </header>
+
+    <div class="stats">
+      <article class="stat"><span class="stat__value" id="stat-played">0</span><span class="stat__label">Partidos jugados</span></article>
+      <article class="stat"><span class="stat__value" id="stat-won">0</span><span class="stat__label">Ganados</span></article>
+      <article class="stat"><span class="stat__value" id="stat-lost">0</span><span class="stat__label">Perdidos</span></article>
+      <article class="stat"><span class="stat__value" id="stat-winrate">0</span><span class="stat__label">Efectividad (%)</span></article>
+      <article class="stat"><span class="stat__value" id="stat-gpm">0</span><span class="stat__label">Goles a favor por partido</span></article>
+      <article class="stat"><span class="stat__value" id="stat-gapm">0</span><span class="stat__label">Goles en contra por partido</span></article>
+      <article class="stat"><span class="stat__value stat__value--sm" id="stat-goals">0:0</span><span class="stat__label">Diferencia de gol</span></article>
+      <article class="stat"><span class="stat__value stat__value--sm" id="stat-best">—</span><span class="stat__label">Mayor goleada</span></article>
+    </div>
+
+    <div class="winrate">
+      <div class="winrate__head">
+        <span>Efectividad</span>
+        <span id="record-line"></span>
+      </div>
+      <div class="winrate__track"><div class="winrate__bar" id="winrate-bar"></div></div>
+    </div>
+
+    <div class="recent">
+      <div class="recent__head">
+        <h3>Partidos disputados</h3>
+        <div class="streak" id="form-streak"></div>
+      </div>
+      <ul class="match-list" id="match-list"></ul>
+    </div>
+  </section>
+
+  <section class="section reveal" id="vitrina">
+    <header class="section__head">
+      <span class="section__num">03</span>
+      <h2>Vitrina</h2>
+    </header>
+    <ul class="trophies" id="trophy-list"></ul>
+  </section>
+
+  <section class="section section--challenge reveal" id="desafio">
+    <header class="section__head">
+      <span class="section__num">04</span>
+      <h2>¿Querés jugar contra nosotros?</h2>
+    </header>
+
+    <div class="challenge-grid">
+      <div class="challenge-copy">
+        <p>
+          Completá la solicitud con los datos de tu equipo y una fecha tentativa.
+          Coordinamos sede y horario por el contacto que dejes.
+        </p>
+        <ul class="challenge-rules">
+          <li><span>Formato</span> Fútbol 7, dos tiempos de 25 minutos</li>
+          <li><span>Sede</span> A convenir entre ambos equipos</li>
+          <li><span>Árbitro</span> Neutral, a cargo del local</li>
+        </ul>
+      </div>
+
+      <form class="form" id="challenge-form" novalidate>
+        <div class="field">
+          <label for="team">Nombre del equipo</label>
+          <input id="team" name="team" type="text" autocomplete="off" />
+          <small class="field__error" data-error-for="team"></small>
+        </div>
+        <div class="field">
+          <label for="contact">Mail o teléfono</label>
+          <input id="contact" name="contact" type="text" autocomplete="off" />
+          <small class="field__error" data-error-for="contact"></small>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="level">Tipo de partido</label>
+            <select id="level" name="level">
+              <option>Amistoso</option>
+              <option>Torneo</option>
+              <option>Revancha</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="date">Fecha tentativa</label>
+            <input id="date" name="date" type="date" />
+            <small class="field__error" data-error-for="date"></small>
+          </div>
+        </div>
+        <div class="field">
+          <label for="message">Observaciones</label>
+          <textarea id="message" name="message" rows="3"></textarea>
+        </div>
+        <button class="btn btn--block" type="submit">Enviar solicitud</button>
+      </form>
+    </div>
+
+    <div class="challenge-board">
+      <div class="challenge-board__head">
+        <h3>Solicitudes registradas <span id="challenge-count">00</span></h3>
+        <button class="btn btn--line" id="challenge-clear" type="button">Vaciar</button>
+      </div>
+      <p class="challenge-empty" id="challenge-empty">No hay solicitudes registradas.</p>
+      <ul class="challenge-list" id="challenge-list"></ul>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <img class="footer__crest" src="logo.png" alt="" />
+  <p>CheTeam &mdash; <span id="year"></span></p>
+</footer>
+
+<div class="notice" id="notice" role="status" aria-live="polite"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
